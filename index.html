@@ -8,86 +8,43 @@
 
     <div class="jumbotron">
       <h3 class="display-6">¡Gracias por ser parte del entrenamiento del Bot Abastible!</h3>
-      <p class="lead"> Guía del usuario: Testing al Botón Abastible</p>
+      <p class="lead"> Guía del usuario: Testing al Bot Abastible</p>
       <hr class="my-4">
       <p>Recuerda que tu colaboración es para evaluar al BOT y en ningún caso al usuario (tú). Por lo mismo, te pedimos que en tu conversación con el BOT seas naturalmente tú, como un ciudadan@ más!
       </p>
-      
-      <a role="button" href="https://www.messenger.com/t/306596109837042" target="_blank" class="btn btn-primary">Probar Iris en Facebook</a>
-      <br>
-      <br>
 
-      <p>Te dejaremos una guía de tópicos que nos gustaría que pruebes con él, de igual forma te propiciamos algunas consideraciones:</p>
+	<div class="alert alert-primary">
+		Tu número de teléfono asignado es: <b id="phone"></b>
+	</div>
+	<div id="address-container"></div>
+
+      <p>Antes de empezar lee atentamente las siguientes instrucciones:</p>
 
       <div class="row">
-        <div class="col-sm">
-          <div class="card" style="width: 18rem;">
+        <div class="col-md-12">
+          <div class="card">
             <div class="card-body">
-              <h5 class="card-title">1) Indicaciones</h5>
-              <p class="card-text">El bot solo responderá preguntas relacionadas con el botón. Por ahora no saluda ni entiende saludos u otros temas (está en curso intensivo de modales ;) ya que el objetivo principal ahora es que aprenda y responda solo cosas relacionadas
-                al botón Abastible. Ejemplos:</p>
+              <h5 class="card-title" style="margin-bottom: 0;">Instrucciones</h5>
             </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">¿Qué es una limonada?</li>
-              <li class="list-group-item">¿Porque se llama Limonada?</li>
-              <li class="list-group-item">¿Cómo se hace una limonada?</li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-sm">
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">2) Indicaciones</h5>
-              <p class="card-text">1) Intenta preguntar de muchas maneras la misma consulta. Aquello que quieres que el bot te responda, puedes hacerlas con falta de ortografía, cambiando el orden de lo que preguntas… usa tu imaginación! Ejemplos:</p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Quiero limonada?</li>
-              <li class="list-group-item">Me das una limonada?</li>
-              <li class="list-group-item">Cómo consigo mi limonada?</li>
-            </ul>
+            <ol class="list-group list-group-flush">
+              <li class="list-group-item">El BOT sólo responde a consultas sobre <b>Botón</b> y <b>Medidor</b>, y podrás realizar un <b>pedido de gas</b>. Es de suma importancia que pruebes todas las funcionalidades.</li>
+              <li class="list-group-item" id="address-instruction"></li>
+              <li class="list-group-item">Si el BOT te responde de forma equivocada y tienes alguna sugerencia escribe <b>ERROR</b> (en MAYÚSCULAS y sin espacios) en la conversación y podrás explicar los detalles del error cometido. De esta forma podremos detectar el problema y mejorarlo.</li>
+              <li class="list-group-item">Cuando ya te sientas seguro de que terminaste de conversar con el BOT, escribe <b>CALIFICAR</b> (en MAYÚSCULAS y sin espacios) en la conversación y podrás ponerle una nota de 1 a 7 a tu experiencia. No te olvides de dejar tus comentarios o sugerencias, eso nos ayudará a mejorar.</li>
+            </ol>
           </div>
         </div>
       </div>
 
+	<br>
 
+	<a role="button" href="https://www.messenger.com/t/378836019260812" target="_blank" class="btn btn-primary">Probar Iris en Facebook</a>
 
+	<br><br>
 
-      <br>
-      <p>
-        Los temas principales que debes abordar son:
-      </p>
-      <ol>
-        <li>Qué es el botón.</li>
-        <li>Cómo adquirir el botón Abastible.</li>
-        <li>
-          Formas de pago del botón.
-          <ul>
-            <li>Preguntar si se paga por el botón.</li>
-            <li>Preguntar si se puede adquirir gratis el botón.</li>
-          </ul>
-        </li>
-        <li>
-          Configuración de botón.
-          <ul>
-            <li>Problemas de configuración.</li>
-            <li>Cambio de dirección del botón.</li>
-          </ul>
-
-        </li>
-        <li>
-          Despacho del botón.
-          <ul>
-            <li>Problemas de despacho.</li>
-          </ul>
-        </li>
-      </ol>
-
-      <div class="alert alert-primary" role="alert">
-        Importante: Por cada uno de los 5 temas principales, conversa con el BOT en al menos 4 formas diferentes (ideal si haces 6+). Gracias!
+      <div>
+        Muchas gracias por tu participación, recuerda que estarás participando por increíbles premios.
       </div>
-
-
-
     </div>
   </div>
   
@@ -103,6 +60,45 @@
     window.TalkCenter = {
       token: "1f004e7504e48dc156496f7112bc7266"
     };
+
+    var clients = {
+        '223152070': [null, 'AVENIDA LAS NIEVES ORIENTE 715, PUENTE ALTO'],
+        '225611073': [null, 'LAS ARAUCARIAS 1192, EL BOSQUE'],
+        '228735425': [null, 'BANDERA 344, SANTIAGO'], // Dos direcciones, pero una se omite porque está mal escrita
+        '225289834': [null, 'OCEANO ATLANTICO 13221, EL BOSQUE', 'GENERAL SILVA 12850, EL BOSQUE'],
+        '984153233': [null],
+        '322567158': [null]
+    };
+
+    function chooseAny(someList) {
+        var randIndex = Math.floor(Math.random() * someList.length);
+        return someList[randIndex];
+    }
+
+    function getPhone() {
+        var phonesList = Object.keys(clients);
+        return chooseAny(phonesList);
+    }
+
+    function getAddress(phone) {
+        var addresses = clients[phone];
+        var address = chooseAny(addresses);
+        return address
+    }
+
+    var phone = getPhone();
+    var address = getAddress(phone);
+
+    var addressContainer = document.getElementById('address-container');
+    var addressInstruction = document.getElementById('address-instruction');
+
+    document.getElementById('phone').append(phone);
+    if (address) {
+        addressContainer.innerHTML = '<div class="alert alert-primary">Tu dirección asignada es: <b>' + address + '</b></div>';
+        addressInstruction.innerHTML = 'Para hacer un pedido utiliza el <b>N° de teléfono</b> y la <b>dirección</b> que se te asignaron en la parte superior de esta pantalla, no puedes utilizar otros.';
+    } else {
+        addressInstruction.innerHTML = 'Para hacer un pedido utiliza el <b>N° de teléfono</b> que se te asigno en la parte superior de esta pantalla, no puedes utilizar otro. Eres libre de usar la dirección que quieras.';
+    }
 
   </script>
 
