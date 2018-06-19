@@ -88,7 +88,15 @@
     var addressContainer = document.getElementById('address-container');
     var addressInstruction = document.getElementById('address-instruction');
 
-    document.getElementById('phone').append(phone);
+
+    // IF IE 11
+    if (!(window.ActiveXObject) && "ActiveXObject" in window){
+        var textNode = document.createTextNode(phone);
+        var phoneElement = document.getElementById('phone');
+        phoneElement.appendChild(textNode)
+    } else{
+        document.getElementById('phone').append(phone);
+    }
     if (address) {
         addressContainer.innerHTML = '<div class="alert alert-primary">Tu dirección asignada es: <b>' + address + '</b></div>';
         addressInstruction.innerHTML = 'Para hacer un pedido utiliza el <b>N° de teléfono</b> y la <b>dirección</b> que se te asignaron en la parte superior de esta pantalla, no puedes utilizar otros.';
